@@ -1,0 +1,20 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    tools:context="in.lamiv.weatherforecast.LoadingFragment">
+
+    <TextView
+        android:text="@string/loading_fragment"
+        android:layout_gravity="top"
+        android:layout_marginTop="@dimen/loading_header_top_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_header_font_size"
+        android:textColor="@color/whiteTextColor"
+        android:textStyle="bold"
+        android:id="@+id/connecting_fragment_header" />
+
+</FrameLayout>
