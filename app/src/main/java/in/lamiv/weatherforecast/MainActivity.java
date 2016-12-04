@@ -1,13 +1,68 @@
 package in.lamiv.weatherforecast;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import in.lamiv.weatherforecast.utils.BaseActivity;
+import in.lamiv.weatherforecast.utils.BaseFragment;
+import in.lamiv.weatherforecast.utils.GlobalVars;
+
+public class MainActivity extends BaseActivity implements TryAgainFragment.OnActionListener,
+        LoadingFragment.OnActionListener {
+
+    private BaseFragment mCurrentFragment;
+    private String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getUserLocation();
     }
+
+    //Methods from base activity
+    //{
+    @Override
+    protected void loadDataLoadingFragment(){
+        transitionToFragment(LoadingFragment.newInstance());
+    }
+
+    @Override
+    protected void loadTryAgainFragment(){
+        transitionToFragment(TryAgainFragment.newInstance());
+    }
+    //}
+
+    //Try again button click listener
+    //{
+    @Override
+    public void onTryAgainClicked() {
+        getUserLocation();
+    }
+    //}
+
+    //On loading completed action listener
+    //{
+    @Override
+    public void onLoadingCompleted(GlobalVars.LoadingAction loadingAction) {
+        if(loadingAction == GlobalVars.LoadingAction.SUCCESSFUL) {
+            transitionToFragment(WeatherFragment.newInstance());
+        }
+        else if(loadingAction == GlobalVars.LoadingAction.FAILED) {
+            transitionToFragment(TryAgainFragment.newInstance());
+        }
+        else {
+            Toast.makeText(this, "Unknown state", Toast.LENGTH_LONG).show();
+            Log.wtf(TAG, "Unknown state returned by loading fragment");
+        }
+    }
+    //}
+
+    private void transitionToFragment(BaseFragment fragment) {
+        mCurrentFragment = fragment;
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_layout,
+                fragment).commit();
+    }
+
 }

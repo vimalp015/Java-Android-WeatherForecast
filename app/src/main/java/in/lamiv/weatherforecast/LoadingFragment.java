@@ -7,23 +7,38 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import in.lamiv.weatherforecast.dataobjects.ForecastData;
+import in.lamiv.weatherforecast.utils.BaseFragment;
+import in.lamiv.weatherforecast.utils.GlobalVars;
+
 
 /**
- * A simple {@link Fragment} subclass.
+ * This fragment will displayed to user while the weather data is being loaded
  */
-public class LoadingFragment extends Fragment {
+public class LoadingFragment extends BaseFragment {
 
-
-    public LoadingFragment() {
-        // Required empty public constructor
-    }
-
+    OnActionListener mOnActionListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_loading, container, false);
+        View view = inflater.inflate(R.layout.fragment_loading, container, false);
+        getForecastData();
+        return view;
+    }
+
+    private void getForecastData(){
+        ForecastData forecastData = new ForecastData();
+
+    }
+
+    public static LoadingFragment newInstance(){
+        LoadingFragment fragment = new LoadingFragment();
+        return fragment;
+    }
+
+    public interface OnActionListener {
+        void onLoadingCompleted(GlobalVars.LoadingAction loadingAction);
     }
 
 }

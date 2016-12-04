@@ -7,4 +7,8 @@
     <color name="screenGradientStart">#237AFB</color>
     <color name="screenGradientEnd">#4DA7FC</color>
     <color name="whiteTextColor">#FFFFFF</color>
+
+    <color name="buttonTextNormal">#ffffff</color>
+    <color name="buttonTextPressed">#2E86FC</color>
+
 </resources>
