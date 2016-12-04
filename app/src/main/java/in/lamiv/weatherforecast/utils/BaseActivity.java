@@ -9,23 +9,41 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+
+import pl.charmas.android.reactivelocation.ReactiveLocationProvider;
+import rx.Observer;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 public class BaseActivity extends AppCompatActivity {
 
-    public Location location;
+    protected Subscription subscription;
+    private String TAG = "BaseActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    protected void onDestroy() {
+        unSubscribe();
+        super.onDestroy();
+    }
+
     protected void getUserLocation() {
 
         if ( ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION )
                 == PackageManager.PERMISSION_GRANTED ) {
-            loadDataLoadingFragment();
-            LocationManager lm = (LocationManager)getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
-            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+            final ReactiveLocationProvider locationProvider = new ReactiveLocationProvider(this);
+            subscription = locationProvider.getLastKnownLocation()
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(locationObserver);
         }
         else {
             loadTryAgainFragment();
@@ -37,8 +55,29 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected void loadDataLoadingFragment(){}
+    Observer<Location> locationObserver = new Observer<Location>() {
+        @Override
+        public void onCompleted() {
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            Log.e(TAG, e.getMessage());
+        }
+
+        @Override
+        public void onNext(Location location) {
+            loadDataLoadingFragment(location);
+        }
+    };
+
+    protected void loadDataLoadingFragment(Location location){}
 
     protected void loadTryAgainFragment(){}
+
+    protected void unSubscribe(){
+        if(subscription != null)
+            subscription.unsubscribe();
+    }
 
 }

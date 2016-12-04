@@ -3,5 +3,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="loading_fragment">Weather forecast is loading...</string>
+    <string name="initializing_app">Initializing your app...</string>
 
 </resources>

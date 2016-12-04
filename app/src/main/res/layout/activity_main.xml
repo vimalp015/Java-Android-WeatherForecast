@@ -3,5 +3,17 @@
     android:id="@+id/activity_main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
     android:orientation="vertical">
+    <TextView
+        android:text="@string/initializing_app"
+        android:layout_gravity="top"
+        android:layout_marginTop="@dimen/loading_header_top_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_header_font_size"
+        android:textColor="@color/whiteTextColor"
+        android:textStyle="bold"
+        android:id="@+id/connecting_fragment_header" />
 </FrameLayout>

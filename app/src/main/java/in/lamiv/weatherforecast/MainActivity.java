@@ -1,9 +1,11 @@
 package in.lamiv.weatherforecast;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import in.lamiv.weatherforecast.dataobjects.ForecastData;
 import in.lamiv.weatherforecast.utils.BaseActivity;
 import in.lamiv.weatherforecast.utils.BaseFragment;
 import in.lamiv.weatherforecast.utils.GlobalVars;
@@ -24,8 +26,9 @@ public class MainActivity extends BaseActivity implements TryAgainFragment.OnAct
     //Methods from base activity
     //{
     @Override
-    protected void loadDataLoadingFragment(){
-        transitionToFragment(LoadingFragment.newInstance());
+    protected void loadDataLoadingFragment(Location location){
+        unSubscribe();
+        transitionToFragment(LoadingFragment.newInstance(location));
     }
 
     @Override
@@ -45,9 +48,11 @@ public class MainActivity extends BaseActivity implements TryAgainFragment.OnAct
     //On loading completed action listener
     //{
     @Override
-    public void onLoadingCompleted(GlobalVars.LoadingAction loadingAction) {
+    public void onLoadingCompleted(GlobalVars.LoadingAction loadingAction, ForecastData forecastData) {
         if(loadingAction == GlobalVars.LoadingAction.SUCCESSFUL) {
-            transitionToFragment(WeatherFragment.newInstance());
+            transitionToFragment(WeatherFragment.newInstance(forecastData.getTimezone(), forecastData.getCurrently().getTemperature()
+                    , forecastData.getCurrently().getHumidity(), forecastData.getCurrently().getWindSpeed()
+                    , forecastData.getCurrently().getVisibility(), forecastData.getCurrently().getSummary()));
         }
         else if(loadingAction == GlobalVars.LoadingAction.FAILED) {
             transitionToFragment(TryAgainFragment.newInstance());
@@ -62,7 +67,7 @@ public class MainActivity extends BaseActivity implements TryAgainFragment.OnAct
     private void transitionToFragment(BaseFragment fragment) {
         mCurrentFragment = fragment;
         getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_layout,
-                fragment).commit();
+                fragment).commitAllowingStateLoss();
     }
 
 }

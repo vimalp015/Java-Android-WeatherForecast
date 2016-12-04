@@ -1,13 +1,86 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="in.lamiv.weatherforecast.WeatherFragment">
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@drawable/background_gradient"
+tools:context="in.lamiv.weatherforecast.WeatherFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="TODO:" />
+        android:orientation="vertical">
 
+        <TextView
+            android:text="@string/loading_fragment"
+            android:layout_gravity="top"
+            android:layout_marginTop="@dimen/loading_header_top_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_header_font_size"
+            android:textColor="@color/whiteTextColor"
+            android:textStyle="bold"
+            android:id="@+id/fragment_weather_timezone" />
+
+        <TextView
+            android:text="@string/loading_fragment"
+            android:layout_gravity="top"
+            android:layout_marginTop="@dimen/loading_header_top_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_header_font_size"
+            android:textColor="@color/whiteTextColor"
+            android:textStyle="bold"
+            android:id="@+id/fragment_weather_temperature" />
+
+        <TextView
+            android:text="@string/loading_fragment"
+            android:layout_gravity="top"
+            android:layout_marginTop="@dimen/loading_header_top_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_header_font_size"
+            android:textColor="@color/whiteTextColor"
+            android:textStyle="bold"
+            android:id="@+id/fragment_weather_humidity" />
+
+        <TextView
+            android:text="@string/loading_fragment"
+            android:layout_gravity="top"
+            android:layout_marginTop="@dimen/loading_header_top_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_header_font_size"
+            android:textColor="@color/whiteTextColor"
+            android:textStyle="bold"
+            android:id="@+id/fragment_weather_windspeed" />
+
+        <TextView
+            android:text="@string/loading_fragment"
+            android:layout_gravity="top"
+            android:layout_marginTop="@dimen/loading_header_top_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_header_font_size"
+            android:textColor="@color/whiteTextColor"
+            android:textStyle="bold"
+            android:id="@+id/fragment_weather_visibility" />
+
+        <TextView
+            android:text="@string/loading_fragment"
+            android:layout_gravity="top"
+            android:layout_marginTop="@dimen/loading_header_top_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_header_font_size"
+            android:textColor="@color/whiteTextColor"
+            android:textStyle="bold"
+            android:id="@+id/fragment_weather_summary" />
+    </LinearLayout>
 </FrameLayout>
+
