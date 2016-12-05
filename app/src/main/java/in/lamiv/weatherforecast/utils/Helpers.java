@@ -29,4 +29,8 @@ public class Helpers {
         return null;
     }
 
+    public static double fahrenheitToCelcius(double temperature) {
+        return ((temperature - 32) / .5556);
+    }
+
 }

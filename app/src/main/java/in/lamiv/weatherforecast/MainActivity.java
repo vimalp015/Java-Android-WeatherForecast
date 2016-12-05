@@ -50,9 +50,7 @@ public class MainActivity extends BaseActivity implements TryAgainFragment.OnAct
     @Override
     public void onLoadingCompleted(GlobalVars.LoadingAction loadingAction, ForecastData forecastData) {
         if(loadingAction == GlobalVars.LoadingAction.SUCCESSFUL) {
-            transitionToFragment(WeatherFragment.newInstance(forecastData.getTimezone(), forecastData.getCurrently().getTemperature()
-                    , forecastData.getCurrently().getHumidity(), forecastData.getCurrently().getWindSpeed()
-                    , forecastData.getCurrently().getVisibility(), forecastData.getCurrently().getSummary()));
+            transitionToFragment(WeatherFragment.newInstance(forecastData));
         }
         else if(loadingAction == GlobalVars.LoadingAction.FAILED) {
             transitionToFragment(TryAgainFragment.newInstance());

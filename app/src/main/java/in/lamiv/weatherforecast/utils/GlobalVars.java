@@ -1,5 +1,7 @@
 package in.lamiv.weatherforecast.utils;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by vimal on 12/4/2016.
  */
@@ -11,7 +13,9 @@ public class GlobalVars {
     public static final String SHARED_PREFERENCE_LOCATION = "SHARED_PREFERENCE_LOCATION";
     public static final String SHARED_PREFERENCE_WEATHER_SERVER_RESPONSE_STRING ="SHARED_PREFERENCE_WEATHER_SERVER_RESPONSE_STRING";
     public static final String SHARED_PREFERENCE_WEATHER_SERVER_RESPONSE_DATETIME ="SHARED_PREFERENCE_WEATHER_SERVER_RESPONSE_DATETIME";
+    public static final String SHARED_PREFERENCE_FORECAST_DATA = "SHARED_PREFERENCE_FORECAST_DATA";
     public static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat(".##");
 
     public enum LoadingAction {
         SUCCESSFUL, FAILED
